@@ -10,7 +10,7 @@
   --footer-nav-color: rgba(255, 255, 255, 0.6);
   --main-icons-color: #afb1b8;
   --border-color-elements: #eeeeee;
-  --timing-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *,
@@ -64,8 +64,8 @@ header {
 
 .upper-logo {
   display: inline-block;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 24px;
+  padding-bottom: 25px;
   margin-right: 93px;
 
   color: var(--title-text-color);
@@ -94,6 +94,7 @@ nav {
 }
 
 .main-nav a {
+  position: relative;
   padding: 32px 0;
   display: block;
   color: var(--title-text-color);
@@ -101,6 +102,7 @@ nav {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.02em;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-nav a:hover,
@@ -123,6 +125,7 @@ nav {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.02em;
+  transition: color 250ms var(--timing-function);
 }
 
 .contacts a:hover,
@@ -130,8 +133,21 @@ nav {
   color: var(--accent-text-color);
 }
 
-.main-nav .link.current {
+.link.current {
+  position: relative;
   color: var(--accent-text-color);
+}
+
+.link.current::after {
+  position: absolute;
+  content: "";
+  display: block;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-text-color);
 }
 
 .link-icon {
@@ -311,7 +327,7 @@ nav {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 370px;
+  width: 100%;
   height: 70px;
   color: var(--main-bg-color);
   background-color: rgba(47, 48, 58, 0.8);
@@ -400,6 +416,8 @@ nav {
   height: 44px;
   border-radius: 50%;
   color: var(--main-icons-color);
+  transition: background-color 250ms var(--timing-function);
+  transition: color 250ms var(--timing-function);
 }
 
 .social-icon {
@@ -454,6 +472,8 @@ nav {
   border: 1px solid #afb1b8;
   border-radius: 4px;
   color: var(--main-icons-color);
+  transition: border-color 250ms var(--timing-function);
+  transition: color 250ms var(--timing-function);
 }
 
 .client-icon {
@@ -494,6 +514,8 @@ nav {
   text-align: center;
   color: var(--primery-heading-color);
   background-color: var(--main-bg-color);
+  transition: background-color 250ms var(--timing-function);
+  transition: color 250ms var(--timing-function);
 }
 
 .categories-nav:not(:last-child) {
@@ -509,6 +531,7 @@ nav {
 .our-work {
   display: flex;
   flex-wrap: wrap;
+  transition: box-shadow 250ms var(--timing-function);
 }
 
 .our-work a:hover,
@@ -543,22 +566,25 @@ nav {
 }
 
 .img-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 63px 24px;
   font-size: 18px;
   line-height: 1.56;
   color: var(--main-bg-color);
-  background-color: rgba(33, 150, 243, 0.9);
-  overflow: hidden;
-  transform: translateY(100%);
-  transition: transform var(--title-text-color);
 }
 
-.img-text:hover {
+.img-description {
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  background-color: rgba(33, 150, 243, 0.9);
+  transition: transform 250ms var(--timing-function);
+}
+
+.our-work a:hover .img-description,
+.our-work a:hover .img-description {
+  transform: translateY(-100%);
 }
 
 .description {
@@ -566,7 +592,7 @@ nav {
   padding: 20px 24px;
 }
 
-.work h3 {
+.description h3 {
   margin-bottom: 4px;
   font-weight: 700;
   font-size: 18px;
@@ -575,7 +601,7 @@ nav {
   color: var(--primery-heading-color);
 }
 
-.work p {
+.description p {
   font-weight: 400;
   font-size: 16px;
   line-height: 30px;
@@ -617,6 +643,7 @@ address {
   line-height: 24px;
   letter-spacing: 0.03em;
   color: var(--footer-nav-color);
+  transition: var(--timing-function);
 }
 
 .footer-nav a:focus {
@@ -664,12 +691,14 @@ address {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--primary-white-color);
+  transition: background-color 250ms var(--timing-function);
 }
 
 .footer-socials .social-icon {
   width: 20px;
   height: 20px;
   fill: currentColor;
+  transition: fill 250ms var(--timing-function);
 }
 
 .social-link:hover,
@@ -683,3 +712,47 @@ address {
 }
 
 /*footer*/
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 250ms cubic-bezier(0.6, 0.14, 0.21, 1.43);
+
+  min-width: 528px;
+  min-height: 581px;
+  background-color: var(--primary-white-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background-image: url(../images/icons/close.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

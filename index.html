@@ -39,7 +39,7 @@
         <section class="title">
             <div class="container">
                 <h1 class="hero">Эффективные решения <br>для вашего бизнеса</h1>
-                <button class="order" type="submit">Заказать услугу</button>
+                <button class="order" type="submit" data-modal-open>Заказать услугу</button>
             </div>
         </section>
         <section class="feauture-item">
@@ -341,5 +341,11 @@
             </div>
         </div>
     </footer>
+    <div class="backdrop is-hiddin" data-modal>
+        <div class="modal">
+            <button class="modal-close" data-modal-close></button>
+        </div>
+    </div>
+    <script src="./js/modal.js"></script>
 </body>
 </html>
